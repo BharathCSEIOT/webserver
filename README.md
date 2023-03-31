@@ -27,8 +27,47 @@ Serving the HTML pages.
 Testing the webserver
 
 ## PROGRAM:
+```py
+from http.server import HTTPServer,BaseHTTPRequestHandler
 
+content='''
+<!doctype html>
+<html>
+<head>
+<title> My Web Server</title>
+</head>
+<body>
+<h1>Top Five Web Application Development Frameworks</h1>
+<h2>1. Django</h2>
+<h2>2. MEAN Stack</h2>
+<h2>3. React </h2>
+<h2>4. Ruby on Rails</h2>
+<h2>5. Angular</h2>
+</body>
+</html>
+'''
+
+class MyServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("Get request received...")
+        self.send_response(200) 
+        self.send_header("content-type", "text/html")       
+        self.end_headers()
+        self.wfile.write(content.encode())
+
+print("This is my webserver") 
+server_address =('',8000)
+httpd = HTTPServer(server_address,MyServer)
+httpd.serve_forever()
+```
 ## OUTPUT:
+
+###Server output:
+![web](https://user-images.githubusercontent.com/122793480/229028741-4f48b9c8-8f48-401b-8720-81061a8a1658.jpg)
+
+###client output:
+![clientop](https://user-images.githubusercontent.com/122793480/229028869-9d85a57e-29d2-458f-baa0-018294c214f6.png)
+
 
 ## RESULT:
 The program is executed succesfully
